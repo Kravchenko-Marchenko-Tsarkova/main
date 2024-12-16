@@ -38,6 +38,10 @@ class Rectangle(Shape):
 class Square(Rectangle):
   def __init__(self, side, x=0, y=0):
     super().__init__(side, side, x, y)
+    
+class Square1(Rectangle):
+  def __init__(self, side, x=0, y=0):
+    super().__init__(side, side, x, y)
 
   @property
   def width(self):
@@ -56,3 +60,33 @@ class Square(Rectangle):
   def height(self, value):
     self._height = value
     self._width = value  #устанавливаем одинаковые значения для ширины и высоты квадрата
+
+#протестируем: покажем, что класс Square нарушает LSP, класс Square1 этот принцип нарушать не будет
+
+print("Пример для Square:")
+square = Square(4)
+print("Изначальная ширина:", square.width)
+print("Изначальная высота:", square.height)
+
+#изменение только ширины
+square.width = 8
+print("После изменения ширины:")
+print("Ширина:", square.width)  # 8
+print("Высота:", square.height)  # 4 (нарушение: стороны квадрата должны быть равны)
+
+print("\nПример для Square1:")
+square1 = Square1(4)
+print("Изначальная ширина:", square1.width)
+print("Изначальная высота:", square1.height)
+
+#изменение ширины
+square1.width = 8
+print("После изменения ширины:")
+print("Ширина:", square1.width)  # 8
+print("Высота:", square1.height)  # 8 (корректное поведение: стороны равны)
+
+#изменение высоты
+square1.height = 6
+print("После изменения высоты:")
+print("Ширина:", square1.width)  #6
+print("Высота:", square1.height)  #6 (корректное поведение: стороны равны)
