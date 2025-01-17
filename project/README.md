@@ -38,7 +38,7 @@
 
 ```
 git clone <https://github.com/Kravchenko-Marchenko-Tsarkova/main.git>
-cd <main>
+cd <project>
 pip install -r requirements.txt
 ```
 
