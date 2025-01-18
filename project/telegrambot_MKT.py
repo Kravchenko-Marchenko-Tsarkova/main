@@ -35,8 +35,17 @@ def update_database(name):
 
 # Загрузка модели
 cnn_model = load_model('face_recognition_model.h5')
-vasukipatel_face_recognition_dataset_path = kagglehub.dataset_download('vasukipatel/face-recognition-dataset')
-data_directory = "/root/.cache/kagglehub/datasets/vasukipatel/face-recognition-dataset/versions/1/Original Images/Original Images/"
+
+# Указываем пользовательский путь к кэшу
+custom_cache_dir = "./data_cache"
+os.environ["KAGGLEHUB_CACHE_DIR"] = custom_cache_dir
+
+# Скачиваем датасет
+dataset_path = kagglehub.dataset_download('vasukipatel/face-recognition-dataset')
+
+# Указываем путь к данным внутри скачанного датасета
+data_directory = os.path.join(dataset_path, "versions", "1", "Original Images", "Original Images")
+print("Данные находятся в директории:", data_directory)
 
 # Генератор изображений для предварительной обработки
 image_gen = ImageDataGenerator()
@@ -65,7 +74,7 @@ def predict_person(image_path, threshold=0.7):
         return "Я не знаю этого человека. Пользователь сохранен в базе данных под именем Unknown."
 
 # Инициализация бота
-bot = telebot.TeleBot('7835023314:AAG3sTBMs9-cmiLG_xBEbfrtoj6TvdlL06Q')
+bot = telebot.TeleBot('PLACE YOUR TOKEN HERE')
 
 @bot.message_handler(content_types=['photo'])
 def handle_photo(message):
