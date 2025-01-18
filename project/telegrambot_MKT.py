@@ -92,7 +92,7 @@ def handle_photo(message):
 
 @bot.message_handler(content_types=['text'])
 def handle_text(message):
-    if message.text == "/photo":
+    if message.text == "/start":
         bot.send_message(message.from_user.id, "Привет, отправь мне фото для распознавания человека на нем.")
 
     elif message.text == "/database":
